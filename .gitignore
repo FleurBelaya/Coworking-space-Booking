@@ -1,0 +1,9 @@
+__pycache__/
+venv/
+env/
+staticfiles/
+.env
+.env.*
+.idea/
+.ruff_cache/
+poetry.toml
