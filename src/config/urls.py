@@ -1,16 +1,9 @@
 from django.contrib import admin
-from django.urls import path, include
-from rest_framework import routers
+from django.urls import path
 
-from booking.views import SpaceAPI, UserAPI, ReservationAPI
-
-router = routers.SimpleRouter()
-router.register(r'users', UserAPI )
-router.register(r'reservations', ReservationAPI)
-router.register(r'spaces', SpaceAPI)
-
+from booking.views import SpaceOwnerListAPIView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path("admin/", admin.site.urls),
+    path("owners/<int:owner_id>/spaces/", SpaceOwnerListAPIView.as_view()),
 ]
