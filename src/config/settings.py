@@ -2,6 +2,10 @@ from pathlib import Path
 
 from config.settings_config import settings
 
+from .logging.logging_setup import setup_logging
+
+logger = setup_logging()
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = settings.SECRET_KEY
@@ -30,6 +34,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "config.middleware.RequestLoggingMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"

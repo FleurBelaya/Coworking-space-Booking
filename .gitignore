@@ -6,3 +6,4 @@ staticfiles/
 .idea/
 .ruff_cache/
 poetry.toml
+logs/
