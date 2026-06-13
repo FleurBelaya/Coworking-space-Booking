@@ -64,7 +64,6 @@ class Command(BaseCommand):
 
         today = timezone.localdate()
 
-        # space_1 — 2 брони без пересечений
         Reservation.objects.create(
             start_time=today + timedelta(days=1),
             end_time=today + timedelta(days=3),
@@ -77,28 +76,24 @@ class Command(BaseCommand):
             space=space_1,
         )
 
-        # space_2 — 1 бронь
         Reservation.objects.create(
             start_time=today + timedelta(days=6),
             end_time=today + timedelta(days=8),
             space=space_2,
         )
 
-        # space_3 — 1 бронь
         Reservation.objects.create(
             start_time=today + timedelta(days=8),
             end_time=today + timedelta(days=10),
             space=space_3,
         )
 
-        # space_4 — 1 бронь
         Reservation.objects.create(
             start_time=today + timedelta(days=10),
             end_time=today + timedelta(days=12),
             space=space_4,
         )
 
-        # space_5 — 1 бронь (дальше по времени)
         Reservation.objects.create(
             start_time=today + timedelta(days=12),
             end_time=today + timedelta(days=15),

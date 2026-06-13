@@ -3,18 +3,14 @@
 Команды для начала работы:
 
 Склонировать репозиторий
-
-Перейти в терминал 
-
+Перейти в терминал
 cp .env.example .env
 (Надо будет поменять переменные окружения в .env)
-
 docker compose up -d --build
-
 docker compose exec backend python manage.py migrate
-
+docker compose exec backend python manage.py seed_db
+(загрузка тестовых данных: брони, пространства и тд)
 docker compose exec backend python manage.py createsuperuser
-
 docker compose exec backend pytest
 
 # API Endpoints
