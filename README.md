@@ -2,7 +2,12 @@
 
 Команды для начала работы:
 
+Склонировать репозиторий
+
+Перейти в терминал 
+
 cp .env.example .env
+(Надо будет поменять переменные окружения в .env)
 
 docker compose up -d --build
 
@@ -12,7 +17,7 @@ docker compose exec backend python manage.py createsuperuser
 
 docker compose exec backend pytest
 
-# 📌 API Endpoints
+# API Endpoints
 
 Сервис предоставляет REST API для управления пространствами и бронированиями.
 
@@ -21,7 +26,7 @@ http://127.0.0.1:8000/
 
 ---
 
-## 🏢 Пространства (Spaces)
+## Пространства (Spaces)
 
 ### Получить список всех пространств
 GET /spaces/
@@ -40,7 +45,7 @@ DELETE /spaces/{id}/delete/
 
 ---
 
-## 👤 Пространства владельца
+## Пространства владельца
 
 ### Получить пространства конкретного владельца
 GET /owners/{owner_id}/spaces/
@@ -49,7 +54,7 @@ GET /owners/{owner_id}/spaces/
 
 ---
 
-## 📅 Бронирования (Reservations)
+## Бронирования (Reservations)
 
 ### Создать бронирование
 POST /reservations/create/
@@ -63,9 +68,9 @@ DELETE /reservations/{id}/delete/
 
 ---
 
-## 📌 Примеры запросов
+## Примеры запросов
 
-### ➕ Создание пространства
+### Создание пространства
 
 ```http
 POST /spaces/create/
