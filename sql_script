@@ -1,0 +1,75 @@
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    full_name VARCHAR(70) NOT NULL,
+    email VARCHAR(254) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE spaces (
+    id SERIAL PRIMARY KEY,
+    space_name VARCHAR(100) NOT NULL,
+    space_description VARCHAR(500) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    square INTEGER NOT NULL CHECK (square > 0)
+);
+
+CREATE TABLE space_owners (
+    id SERIAL PRIMARY KEY,
+    company_name VARCHAR(100) NOT NULL,
+    space_id INTEGER NOT NULL REFERENCES spaces(id) ON DELETE CASCADE
+);
+
+CREATE TABLE reservations (
+    id SERIAL PRIMARY KEY,
+    start_time TIMESTAMP NOT NULL,
+    end_time TIMESTAMP NOT NULL,
+    space_id INTEGER NOT NULL REFERENCES spaces(id) ON DELETE CASCADE,
+    CHECK (start_time < end_time)
+);
+
+CREATE TABLE user_reservations (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    reservation_id INTEGER NOT NULL REFERENCES reservations(id) ON DELETE CASCADE,
+    UNIQUE (user_id, reservation_id)
+);
+
+INSERT INTO users (full_name, email, password) VALUES
+('Шарлотта Айс', 'charlotte.hayes@example.com', 'password123'),
+('Элеонора Брукс', 'eleanor.brooks@example.com', 'password123'),
+('Себастьян Рид', 'sebastian.reed@example.com', 'password123'),
+('Александр Фостер', 'alexander.foster@example.com', 'password123'),
+('Виктория Стерлинг', 'victoria.sterling@example.com', 'password123');
+
+INSERT INTO spaces (space_name, space_description, price, square) VALUES
+('Фотостудия Свет', 'Профессиональная фотостудия для съёмок', 120.00, 80),
+('Фотостудия Рассвет', 'Студия с большим количеством естественного света', 150.00, 95),
+('Творческий Лофт', 'Пространство для мероприятий и фотосессий', 200.00, 150),
+('Арт-Пространство', 'Уютное пространство для творчества', 90.00, 60),
+
+('Бизнес-Зал', 'Помещение для встреч и конференций', 300.00, 200),
+('Учебная Аудитория', 'Пространство для обучения и мастер-классов', 180.00, 120),
+('Премиум Коворкинг', 'Современное рабочее пространство', 220.00, 140),
+('Большая Переговорная', 'Зал для деловых встреч и презентаций', 250.00, 160),
+
+('Керамическая Мастерская', 'Студия для занятий керамикой и лепкой', 130.00, 70),
+('Творческая Мастерская', 'Пространство для проведения мастер-классов', 110.00, 65),
+('Событийный Лофт', 'Площадка для праздников и мероприятий', 280.00, 180),
+('Галерея Искусств', 'Пространство для выставок и презентаций', 170.00, 100);
+
+INSERT INTO space_owners (company_name, space_id) VALUES
+('Группа Творческих Пространств', 1),
+('Группа Творческих Пространств', 2),
+('Группа Творческих Пространств', 3),
+('Группа Творческих Пространств', 4),
+
+('Бизнес Площадки', 5),
+('Бизнес Площадки', 6),
+('Бизнес Площадки', 7),
+('Бизнес Площадки', 8),
+
+('Арт Сообщество', 9),
+('Арт Сообщество', 10),
+('Арт Сообщество', 11),
+('Арт Сообщество', 12);
+
