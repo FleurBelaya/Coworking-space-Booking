@@ -1,3 +1,4 @@
+from rest_framework import filters
 from rest_framework.generics import CreateAPIView, DestroyAPIView, ListAPIView
 
 from .models import Reservation, Space
@@ -21,8 +22,8 @@ class SpaceOwnerListAPIView(ListAPIView):
     serializer_class = SpaceSerializer
 
     def get_queryset(self):
-        company_name = self.kwargs["company_name"]
-        return Space.objects.filter(spaceowner__company_name=company_name)
+        owner_id = self.kwargs["pk"]
+        return Space.objects.filter(owner_id=owner_id)
 
 
 class ReservationCreateAPIView(CreateAPIView):
@@ -35,6 +36,10 @@ class ReservationDestroyAPIView(DestroyAPIView):
     serializer_class = ReservationSerializer
 
 
-class ReservationListAPIView(ListAPIView):
-    queryset = Reservation.objects.all()
-    serializer_class = ReservationSerializer
+class SpaceListAPIView(ListAPIView):
+    queryset = Space.objects.all()
+    serializer_class = SpaceSerializer
+
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ["price"]
+    ordering = ["price"]

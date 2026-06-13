@@ -1,22 +1,15 @@
-import os
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+from config.settings_config import settings
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = settings.SECRET_KEY
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
+DEBUG = settings.DEBUG
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-1@*a_g7@3^u2y=!gn47rpx89ufei95@+va&yf4+g-+k(2z#^4#"
+ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0", "8.8.8.8"]
-
-# Application definition
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -58,24 +51,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("POSTGRES_DB"),
-        "USER": os.getenv("POSTGRES_USER"),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
-        "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT"),
+        "NAME": settings.POSTGRES_DB,
+        "USER": settings.POSTGRES_USER,
+        "PASSWORD": settings.POSTGRES_PASSWORD,
+        "HOST": settings.DB_HOST,
+        "PORT": settings.DB_PORT,
     }
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -92,7 +77,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"
@@ -101,5 +85,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 STATIC_URL = "static/"
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
